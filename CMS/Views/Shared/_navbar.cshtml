@@ -1,0 +1,40 @@
+@inject IPostService _postService
+
+<nav id="main-nav-wrap">
+    <ul class="main-navigation sf-menu">
+        <li><a href="/" title="">خانه</a></li>
+        @{
+            var categories = _postService.GetAllCategories();
+        }
+        <li class="has-children">
+            <a href="" title="">دسته بندی</a>
+            <ul class="sub-menu">
+                @foreach (var category in categories)
+                {
+                    <li><a asp-controller="Post" asp-action="ShowCategory" asp-route-categoryId="@(category.CategoryId)">@category.Name</a></li>
+                }
+
+            </ul>
+        </li>
+        <li><a asp-controller="Home" asp-action="About" title="">درباره</a></li>
+        <li><a asp-controller="Home" asp-action="Contact" title="">تماس</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>
+                <a asp-controller="Account" asp-action="Profile" style="color: darkcyan;" title="">@(User.Identity.Name) عزیز، خوش آمدید</a>
+                <ul class="dropdown">
+                    <li><a asp-controller="Account" asp-action="EditProfile">ویرایش حساب</a></li>
+                    <li><a asp-controller="Account" asp-action="Security">امنیت حساب</a></li>
+                    <li><a asp-controller="Post" asp-action="AddPost">افزودن پست</a></li>
+                    <li><a asp-controller="Account" asp-action="MyPosts">پست های من</a></li>
+                </ul>
+            </li>
+            <li><a href="/Account/Logout" style="color: red;" title="">خروج</a></li>
+        }
+        else
+        {
+            <li><a href="/Account/Login" style="color: red;" title="">ورود</a></li>
+            <li><a href="/Account/Register" style="color: red;" title="">ثبت نام</a></li>
+        }
+    </ul>
+</nav>

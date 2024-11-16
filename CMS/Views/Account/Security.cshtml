@@ -1,0 +1,24 @@
+﻿@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = "امنیت";
+}
+
+
+<div>
+    <div class="sidebar-profile"><br />
+        <h2>امنیت</h2>
+        <div id="security">
+            <form asp-action="Security" method="post">
+                <label>پسورد جاری</label>
+                <input asp-for="CurrentPassword" style="margin-right: 30%; width: 40%;" type="password" placeholder="پسورد فعلی را وارد کنید" />
+                <label>پسورد جدید</label>
+                <input asp-for="NewPassword" style="margin-right: 30%; width: 40%;" type="password" placeholder="پسورد جدید را وارد کنید" />
+                <label>تکرار پسورد جدید</label>
+                <input asp-for="NewRePassword" style="margin-right: 30%; width: 40%;" type="password" placeholder="تکرار پسورد جدید را وارد کنید" />
+
+                <input type="submit" value="ثبت تغییرات" />
+
+            </form>
+        </div>
+    </div>
+</div>

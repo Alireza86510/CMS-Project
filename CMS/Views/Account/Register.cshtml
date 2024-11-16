@@ -1,0 +1,22 @@
+﻿@model CMS.Core.DTOs.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+    Layout = "_Layout";
+}
+
+<div style="margin-top: 3%;">
+    <form class="registration_form" asp-action="Register">
+        <h2>ثبت نام</h2>
+        <input style="margin-right: 25%; width: 50%;" asp-for="Name" type="text" placeholder="نام خود را وارد کنید">
+        <input style="margin-right: 25%; width: 50%;" asp-for="Email" type="email" placeholder="ایمیل خود را وارد کنید">
+        <input style="margin-right: 25%; width: 50%;" asp-for="Password" type="password" placeholder="رمز عبور خود را وارد کنید">
+        <input style="margin-right: 25%; width: 50%;" asp-for="RePassword" type="password" placeholder="تایید رمز عبور خود را وارد کنید">
+        <input type="submit" class="button" value="ثبت نام">
+        <div class="signup">
+            <span class="signup">
+                حساب کاربری دارید؟
+                <a href="Login" for="check">ورود</a>
+            </span>
+        </div>
+    </form>
+</div>

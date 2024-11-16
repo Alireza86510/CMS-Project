@@ -1,0 +1,25 @@
+﻿@model CMS.Core.DTOs.LoginViewModel
+@{
+    ViewData["Title"] = "ورود";
+    Layout = "_Layout";
+}
+
+<div style="margin-top: 3%;">
+    <form class="login_form" asp-action="Login">
+        <h2>ورود</h2>
+        <input asp-for="Email" style="margin-right: 25%; width: 50%;" type="email" placeholder="ایمیل خود را وارد کنید">
+        <input asp-for="Password" style="margin-right: 25%; width: 50%;" type="password" placeholder="رمز عبور خود را وارد کنید">
+        <div style="text-align: center;">
+            <label>مرا به خاطر بسپار</label>
+            <input asp-for="RememberMe" type="checkbox">
+        </div>
+        <a asp-action="ForgotPassword">فراموشی رمز؟</a><br /><br />
+        <input type="submit" value="ورود">
+        <div class="signup">
+            <span class="signup">
+                حساب کاربری ندارید؟
+                <a href="Register" for="check">ثبت نام</a>
+            </span>
+        </div>
+    </form>
+</div>

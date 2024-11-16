@@ -1,0 +1,94 @@
+﻿@model List<Post>
+@inject IPostService _postService
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+
+<!-- masonry
+================================================== -->
+<section id="bricks">
+
+    <div class="row masonry">
+
+        <!-- brick-wrapper -->
+        <div class="bricks-wrapper">
+
+            <div class="grid-sizer"></div>
+
+            <div class="brick entry featured-grid animate-this">
+                <div class="entry-content">
+                    <div id="featured-post-slider" class="flexslider">
+
+                        @{
+                            var popularPosts = _postService.GetPopularPosts();
+                        }
+
+                        <ul class="slides">
+
+                            @foreach (var post in popularPosts)
+                            {
+                                <li>
+                                    <div class="featured-post-slide">
+
+                                        <div class="post-background"
+                                             style="background-image:url('~/PostsPic/@(post.ImagePath)');"></div>
+
+                                        <div class="overlay"></div>
+
+                                        <div class="post-content">
+                                            <ul class="entry-meta">
+                                                <li>@post.UpdateDate</li>
+                                                <li><a asp-controller="Account" asp-action="Page" asp-route-userId="1">@post.User.Name</a></li>
+                                            </ul>
+
+                                            <h1 class="slide-title">
+                                                <a asp-controller="Post" asp-action="ShowPost" asp-route-postId="@(post.PostId)" title="">
+                                                    @post.Title
+                                                </a>
+                                            </h1>
+                                        </div>
+
+                                    </div>
+                                </li> <!-- /slide -->
+                            }
+
+                        </ul> <!-- end slides -->
+                    </div> <!-- end featured-post-slider -->
+                </div> <!-- end entry content -->
+            </div>
+
+            @foreach (var post in Model)
+            {
+                <article class="brick entry format-standard animate-this">
+
+                    <div class="entry-thumb">
+                        <a asp-controller="Post" asp-action="ShowPost" asp-route-postId="@(post.PostId)" class="thumb-link">
+                            <img src="~/PostsPic/@(post.ImagePath)" alt="building">
+                        </a>
+                    </div>
+
+                    <div class="entry-text">
+                        <div class="entry-header">
+
+                            <div class="entry-meta">
+                                <span class="cat-links">
+                                    <a asp-controller="Post" asp-action="ShowCategory" asp-route-categoryId="@post.CategoryId">@post.Category.Name</a>
+                                </span>
+                            </div>
+
+                            <h1 class="entry-title"><a asp-controller="Post" asp-action="ShowPost" asp-route-postId="@post.PostId">@post.Title</a></h1>
+
+                        </div>
+                        <div class="entry-excerpt">
+                            @post.Content
+                        </div>
+                    </div>
+
+                </article> <!-- end article -->
+            }
+
+        </div> <!-- end brick-wrapper -->
+
+    </div> <!-- end row -->
+
+</section> <!-- end bricks -->

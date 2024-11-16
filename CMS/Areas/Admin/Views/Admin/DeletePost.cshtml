@@ -1,0 +1,19 @@
+﻿@model Post
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "حذف پست";
+}
+
+<div class="card">
+    <div class="card-header">Delete Post</div>
+    <div class="card-body">
+        <h5 class="card-title">Are You Sure To Delete "@(Model.Title)" ?</h5>
+        <form accept-charset="utf-8" action="/Admin/Admin/DeletePost" method="post">
+            <div class="mb-3">
+                <input type="hidden" name="postId" value="@Model.PostId">
+                <input type="submit" value="Yes !" class="btn btn-danger">
+                <a href="/Admin" class="btn btn-info">Cancel !</a>
+            </div>
+        </form>
+    </div>
+</div>

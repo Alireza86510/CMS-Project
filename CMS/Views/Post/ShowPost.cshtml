@@ -1,0 +1,139 @@
+﻿@model CMS.DataLayer.Models.Post
+@inject IPostService _postService
+@inject IUserService _userService
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<!-- content
+================================================== -->
+<section id="content-wrap" class="blog-single">
+    <div class="row">
+        <div class="col-twelve">
+
+            <article class="format-standard">
+
+                <div class="content-media">
+                    <div class="post-thumb">
+                        <img src="~/PostsPic/@(Model.ImagePath)">
+                    </div>
+                </div>
+
+                <div style="width: 100%;">
+                    <a style="padding: 1%; margin: 44%; border: 2px solid black; font-size: x-large;" asp-action="Like" asp-route-postId="@(Model.PostId)">👍 (@(ViewBag.PostReactions))</a>
+                </div>
+
+                <div class="primary-content">
+
+                    <h1 class="page-title">@(Model.Title)</h1>
+
+                    <ul class="entry-meta">
+                        <li class="date">@(Model.CreateDate)</li>
+                        <li class="cat">
+                            <a asp-action="ShowCategory">@(Model.Category.Name)</a>
+                        </li>
+                    </ul>
+                    <p>
+                        @(Model.Content)
+                    </p>
+
+                    <p class="tags">
+                        <span>برچسب ها :</span>
+                        @{
+                            string[] tags = Model.Tags.Split('-');
+                            foreach (var tag in tags)
+                            {
+                                <a href="#">@tag&nbsp;</a>
+                            }
+                        }
+                    </p>
+
+                    <div class="author-profile">
+                        <img src="~/Uploads/@(Model.User.ImagePath)" alt="">
+
+                        <div class="about">
+                            <h4>
+                                <a href="#">@Model.User.Name</a>
+                            </h4>
+
+                            <p>
+                                @Model.User.Description
+                            </p>
+                        </div>
+                    </div> <!-- end author-profile -->
+
+                </div> <!-- end entry-primary -->
+
+            </article>
+
+        </div> <!-- end col-twelve -->
+    </div> <!-- end row -->
+
+    @{
+        var comments = _postService.GetPostCommentsByPostId(Model.PostId);
+    }
+
+    <div class="comments-wrap">
+        <div id="comments" class="row">
+            <div class="col-full">
+
+                <h3>@(comments.Count) نظرات</h3>
+
+                <!-- commentlist -->
+                <ol class="commentlist">
+                    @foreach (var comment in comments)
+                    {
+                        var user = _userService.GetUserById(comment.UserId);
+                        <li class="depth-1">
+
+                            <div class="avatar">
+                                <img width="50" height="50" class="avatar" src="~/Uploads/@(user.ImagePath)" alt="">
+                            </div>
+
+                            <div class="comment-content">
+
+                                <div class="comment-info">
+                                    <cite>@(user.Name)</cite>
+
+                                    <div class="comment-meta">
+                                        <time class="comment-time" datetime="2014-07-12T23:05">@comment.CreateDate</time>
+                                    </div>
+                                </div>
+
+                                <div class="comment-text">
+                                    <p>
+                                        @comment.CommentText
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </li>
+                    }
+                </ol> <!-- Commentlist End -->
+                <!-- respond -->
+                <div class="respond">
+
+                    <h3>پیام بگذارید</h3>
+
+                    <form asp-action="Comment" name="contactForm" id="contactForm" method="post">
+                        <fieldset>
+
+                            <input type="hidden" value="@(Model.PostId)" name="postId" />
+
+                            <div class="message form-field">
+                                <textarea name="message" id="cMessage" class="full-width" placeholder="پیام..."></textarea>
+                            </div>
+
+                            <button type="submit" class="submit button-primary">ارسال</button>
+
+                        </fieldset>
+                    </form> <!-- Form End -->
+
+                </div> <!-- Respond End -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end row comments -->
+    </div> <!-- end comments-wrap -->
+
+</section> <!-- end content -->

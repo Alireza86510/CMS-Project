@@ -1,0 +1,43 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <partial name="_MetaTags" />
+    <title>پنل ادمین | @ViewData["Title"]</title>
+    <link href="~/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="~/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="~/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/master.css" rel="stylesheet">
+    <link href="~/vendor/flagiconcss/css/flag-icon.min.css" rel="stylesheet">
+    <link href="~/vendor/datatables/datatables.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <partial name="_Navbar" />
+        <div id="body" class="active">
+            <!-- navbar navigation component -->
+            <partial name="_Header" />
+            <!-- end of navbar navigation -->
+            <div class="content">
+                <div class="container">
+
+                    @RenderBody()
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/chartsjs/Chart.min.js"></script>
+    <script src="~/js/dashboard-charts.js"></script>
+    <script src="~/js/script.js"></script>
+
+    @await RenderSectionAsync("Scripts", false)
+</body>
+
+</html>

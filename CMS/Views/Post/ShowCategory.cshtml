@@ -1,0 +1,62 @@
+﻿@model List<Post>
+@{
+    ViewData["Title"] = "دسته بندی";
+}
+
+<section id="page-header">
+    <div class="row current-cat">
+        <div class="col-full">
+            <h2>دسته بندی</h2>
+        </div>
+    </div>
+</section>
+
+<section id="bricks" class="with-top-sep">
+
+    <div class="row masonry">
+
+        <div class="bricks-wrapper">
+
+            <div class="grid-sizer"></div>
+
+            @foreach (var post in Model)
+            {
+                <article class="brick entry format-standard animate-this">
+
+                    <div class="entry-thumb">
+                        <a href="/Post/ShowPost?postId=@(post.PostId)" class="thumb-link">
+                            <img src="~/PostsPic/@(post.ImagePath)" alt="building">
+                        </a>
+                    </div>
+
+                    @{
+                        string[] tags = post.Tags.Split('-');
+                    }
+
+                    <div class="entry-text">
+                        <div class="entry-header">
+
+                            <div class="entry-meta">
+                                <span class="cat-links">
+                                    @foreach (var tag in tags)
+                                    {
+                                        <a href="/Post/ShowCategory/@(tag)">@tag</a>
+                                    }
+                                </span>
+                            </div>
+
+                            <h1 class="entry-title"><a>@post.Title</a></h1>
+
+                        </div>
+                        <div class="entry-excerpt">
+                            @post.Content
+                        </div>
+                    </div>
+
+                </article>
+            }
+
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,53 @@
+﻿@model CMS.DataLayer.Models.User
+@{
+    ViewData["Title"] = "پروفایل";
+}
+
+<div>
+    <div class="sidebar-profile">
+        <br />
+        <h2>ویرایش حساب</h2>
+        <div id="personal-info">
+            <div>
+                <img id="img" src="~/Uploads/@(Model.ImagePath)" alt="Profile Image" />
+            </div>
+            <div>
+                <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="UserId" />
+                    <input asp-for="IsAdmin" type="hidden" />
+                    <input asp-for="IsActive" type="hidden" />
+                    <input asp-for="ImagePath" type="hidden" />
+                    <input asp-for="Password" id="password" type="hidden" />
+                    <input asp-for="ActiveCode" id="activeCode" type="hidden" />
+                    <input type="hidden" asp-for="Posts" />
+                    <input type="hidden" asp-for="PostComments" />
+                    <input type="hidden" asp-for="PostReactions" />
+                    <label for="img">تغییر عکس پروفایل</label>
+                    <input asp-for="ImagePath" type="file" name="img" />
+                    <p class="alert-info">برای اعمال عکس مورد نظر را انتخاب کرده و تغییرات را ثبت کنید!</p>
+                    <label for="name">نام</label>
+                    <input style="margin-right: 30%; width: 40%;" asp-for="Name" id="name" type="text" />
+                    <label for="description">توضیحات</label>
+                    <textarea style="margin-right: 30%; width: 40%;" id="description" asp-for="Description"></textarea>
+                    <label for="email">ایمیل</label>
+                    <input style="margin-right: 30%; width: 40%;" asp-for="Email" id="email" type="email" />
+                    @if (Model.IsActive)
+                    {
+                        <label for="isActive">فعال</label>
+                        <input style="margin-right: 30%; width: 40%; color: green;" readonly id="isActive" type="text" value="✓" />
+                    }
+                    else
+                    {
+                        <label for="isActive">فعال</label>
+                        <input style="margin-right: 30%; width: 40%; color: red;" readonly id="isActive" type="text" value="✕" />
+                        <p class="alert-warning">حساب کاربری شما فعال نیست! برای ارسال مجدد ایمیل فعالسازی <a style="font-weight: 900;" asp-action="SendActivationEmail">اینجا</a> کلیک کنید</p>
+                    }
+                    <label for="registerDate">تاریخ ثبت نام</label>
+                    <input style="width: 40%; text-align: center;" asp-for="RegisterDate" readonly id="registerDate" type="date" /><br />
+                    <input type="submit" value="ثبت تغییرات" />
+                </form>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>

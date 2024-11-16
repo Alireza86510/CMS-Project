@@ -1,0 +1,50 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "کاربران";
+}
+
+<div class="wrapper">
+    <div id="body" class="active">
+        <div class="content">
+            <div class="container">
+                <div class="page-title">
+                    <h3>
+                        Users
+                    </h3>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <table width="100%" class="table table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Is Active</th>
+                                    <th>Is Admin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.UserId</td>
+                                        <td>@user.Name</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.Password</td>
+                                        <td>@user.IsActive</td>
+                                        <td>@user.IsAdmin</td>
+                                        <td class="text-end">
+                                            <a href="/Admin/Admin/EditUser?Id=@(user.UserId)" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model AddPostViewModel
+@inject IPostService _postService
+@{
+    ViewData["Title"] = "افزودن پست";
+}
+
+<div style="margin-top: 3%;">
+    <form class="login_form" asp-action="AddPost" method="post" enctype="multipart/form-data">
+        <h2>افزودن پست جدید</h2>
+        <label>عکس پست</label>
+        <input name="img" style="margin-right: 25%; width: 50%;" type="file" placeholder="عکس پست را انتخاب کنید">
+        <label>عنوان پست</label>
+        <input asp-for="Title" style="margin-right: 25%; width: 50%;" type="text" placeholder="عنوان پست را وارد کنید">
+        <label>محتوای پست</label>
+        <textarea asp-for="Content" rows="20" style="margin-right: 25%; width: 50%;" placeholder="محتوای پست را وارد کنید"></textarea>
+        <label>برچسب های پست</label>
+        <input asp-for="Tags" style="margin-right: 25%; width: 50%;" type="text" placeholder="برچسب های پست را وارد کنید (با - جدا کنید)">
+        <label>دسته بندی پست</label>
+        @{
+            var categories = _postService.GetAllCategories();
+        }
+        <select name="categoryId" style="margin-right: 25%; width: 50%;">
+            @foreach (var category in categories)
+            {
+                <option value="@(category.CategoryId)">@category.Name</option>
+            }
+        </select>
+        <input type="submit" value="ثبت">
+    </form>
+</div>

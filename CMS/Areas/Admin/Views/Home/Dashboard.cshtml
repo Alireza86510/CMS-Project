@@ -1,0 +1,115 @@
+﻿@inject IAdminService _adminService
+@{
+    ViewData["Title"] = "خانه";
+    var data = _adminService.GetDashboardData();
+}
+
+
+<div class="row">
+    <div class="col-md-12 page-header">
+        <div class="page-pretitle">Overview</div>
+        <h2 class="page-title">Dashboard</h2>
+    </div>
+</div>
+<div class="row">
+    <a class="col-sm-6 col-md-6 col-lg-3 mt-3" href="/Admin/Admin/Posts">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="icon-big text-center">
+                            <i class="teal fas fa-newspaper"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="detail">
+                            <p class="detail-subtitle">Posts</p>
+                            <span class="number">@data.Item2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="fas fa-calendar"></i> @DateTime.Now.ToShamsi()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="col-sm-6 col-md-6 col-lg-3 mt-3" href="/Admin/Admin/Users">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="icon-big text-center">
+                            <i class="violet fas fa-contact-card"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="detail">
+                            <p class="detail-subtitle">Users</p>
+                            <span class="number">@data.Item1</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="fas fa-calendar"></i> @DateTime.Now.ToShamsi()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="col-sm-6 col-md-6 col-lg-3 mt-3" href="/Admin/Admin/Comments">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="icon-big text-center">
+                            <i class="orange fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="detail">
+                            <p class="detail-subtitle">Comments</p>
+                            <span class="number">@data.Item3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="fas fa-calendar"></i> @DateTime.Now.ToShamsi()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="col-sm-6 col-md-6 col-lg-3 mt-3" href="/Admin/Admin/Reactions">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="icon-big text-center">
+                            <i class="blue mb-2 fas fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="detail">
+                            <p class="detail-subtitle">Reactions</p>
+                            <span class="number">@data.Item4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="fas fa-calendar"></i> @DateTime.Now.ToShamsi()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,53 @@
+﻿@model Post
+@inject IPostService _postService
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "ویرایش پست";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">Edit Post</div>
+        <div class="card-body">
+            <h5 class="card-title">Edit Post "@(Model.Title)"</h5>
+            <form action="/Admin/Admin/EditPost" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                <div class="mb-3">
+                    <input type="hidden" asp-for="PostId" />
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="ImagePath" />
+                    <label for="email" class="form-label">Image</label><br />
+                    <img src="~/PostsPic/@(Model.ImagePath)" alt="Post Picture" class="mw-100" /><br /><br />
+                    <input type="file" name="img" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Content</label>
+                    <textarea asp-for="Content" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Tags</label>
+                    <input asp-for="Tags" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Post Category</label>
+                    @{
+                        var categories = _postService.GetAllCategories();
+                    }
+                    <select asp-for="CategoryId" class="form-control">
+                        @foreach (var category in categories)
+                        {
+                            <option value="@(category.CategoryId)">@category.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary">
+                    <a href="/Admin" class="btn btn-info">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
